@@ -32,8 +32,8 @@ bi-ejercicio-opencode/
 ### Paso 1 — Clonar este repositorio
 
 ```bash
-git clone <URL_QUE_TE_DI>
-cd bi-ejercicio-opencode
+git clone https://github.com/daververa/CASO-1-AGENTE-DE-TERMINAL.git
+cd CASO-1-AGENTE-DE-TERMINAL
 ```
 
 ### Paso 2 — Configurar OpenCode
@@ -42,8 +42,21 @@ Copia `config/opencode.json.example` a `opencode.json` en la raíz del proyecto 
 
 ### Paso 3 — Conectar mínimo 2 servidores MCP
 
-1. **Un MCP de filesystem**, para que el modelo pueda leer directamente `data/ventas_campana.csv` sin que tú se lo pegues manualmente en el chat.
-2. **Un MCP de acceso a web/fetch**, para investigar un dato externo real: busca cuál es el CTR promedio de la industria en redes sociales o Google Ads para un sector similar al de la campaña (puedes elegir el sector, ej. retail, moda, restaurantes).
+Puedes pedirle a OpenCode (la IA) que instale y configure los MCP por ti, copiando y pegando esto en el chat:
+
+> *"Instala y configura los siguientes MCP servers en opencode.json:*
+> 1. *`filesystem` tipo local, con el comando `npx -y @modelcontextprotocol/server-filesystem ./data`, para leer los archivos de este proyecto.*
+> 2. *`web-fetch` tipo remote en la URL `https://fetch.mcp.a-sh.work`, para buscar datos en internet."*
+>
+> *Luego verifica que ambos MCP estén conectados y funcionando.*
+
+Los nombres de los servidores MCP que vas a necesitar son:
+
+1. **`filesystem`** — `@modelcontextprotocol/server-filesystem`
+   MCP de **filesystem**, para que el modelo pueda leer directamente `data/ventas_campana.csv` sin que tú se lo pegues manualmente en el chat.
+2. **`web-fetch`** — servidor **fetch/MCP de acceso a web**, para investigar un dato externo real: busca cuál es el CTR promedio de la industria en redes sociales o Google Ads para un sector similar al de la campaña (puedes elegir el sector, ej. retail, moda, restaurantes).
+
+> Si algo falla, revisa el archivo `config/opencode.json.example` de este repositorio, que ya viene con ambos servidores declarados.
 
 ### Paso 4 — Limpiar los datos y calcular KPIs (usando OpenCode)
 
